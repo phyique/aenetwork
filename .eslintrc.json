@@ -1,0 +1,29 @@
+{
+  "extends": ["airbnb-base"],
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "no-underscore-dangle": ["error", { "allow" :  ["_id"] }],
+    "no-shadow": "off",
+    "max-len": "off",
+    "function-paren-newline": "off",
+    "no-restricted-globals": "off",
+    "function-call-argument-newline": "off",
+    "no-console": "off",
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
+    "no-use-before-define": ["error", {"functions": false, "variables": false}],
+    "no-await-in-loop": "off",
+    "arrow-body-style": "off",
+    "array-callback-return": "off",
+    "import/no-extraneous-dependencies": "off"
+  },
+  "ignorePatterns": ["public/js/**", "node_modules/*.js", "node_modules/ipaddr.js"],
+  "overrides": [{
+    "files": [ "*.test.js" ],
+    "rules": {
+      "no-undef": 0
+    }
+  }]
+}
