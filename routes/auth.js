@@ -35,13 +35,4 @@ router.post('/login', async (req, res, next) => {
   })(req, res, next);
 });
 
-// eslint-disable-next-line no-unused-vars
-router.get('/profile', (req, res, next) => {
-  res.json({
-    message: 'You made it to the secure route',
-    user: req.user,
-    token: req.query.secret_token,
-  });
-});
-
 module.exports = router;
