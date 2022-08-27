@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const rand = require('random-key');
-const uniqueValidator = require('mongoose-unique-validator')
+const uniqueValidator = require('mongoose-unique-validator');
+
 const { Schema } = mongoose;
 
 const showSchema = new Schema({
