@@ -1,20 +1,19 @@
 const nodemailer = require('nodemailer');
 
 exports.handler = async(event) => {
-
-    // const { user, pass } = await nodemailer.createTestAccount();
+    const { OUTLOOK_EMAIL, OUTLOOK_PASSWORD } = process.env;
     const transporter = nodemailer.createTransport({
         host: 'smtp.office365.com',
         port: 587,
         auth: {
-            user: 'kratosnetwrks@outlook.com',
-            pass: process.env.OUTLOOK_PASSWORD
+            user: OUTLOOK_EMAIL,
+            pass: OUTLOOK_PASSWORD
         },
         tls: { ciphers: 'SSLv3' }
     });
     try {
         await transporter.sendMail({
-            from: 'kratosnetwrks@outlook.com',
+            from: OUTLOOK_EMAIL,
             to: "vaun-pierre@hotmail.com",
             subject: 'Event Trigger',
             text: JSON.stringify(event), // plain text body

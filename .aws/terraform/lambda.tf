@@ -32,6 +32,7 @@ resource "aws_lambda_function" "send_mail" {
   environment {
     variables = {
       OUTLOOK_PASSWORD = var.outlook_password
+      OUTLOOK_EMAIL = var.outlook_email
     }
   }
   source_code_hash = data.archive_file.send_mail.output_base64sha256
