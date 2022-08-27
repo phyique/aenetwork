@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "watch": "nodemon",
+    "jest": "jest --colors",
     "eslint:fix": "eslint \"**/*.js\" --fix"
   },
   "dependencies": {
