@@ -14,7 +14,8 @@ exports.handler = async (event) => {
   try {
     await transporter.sendMail({
       from: OUTLOOK_EMAIL,
-      to: 'vaun-pierre@hotmail.com',
+      // to: ['vaun-pierre@hotmail.com', 'michael.puterbaugh@aenetworks.com'],
+      to: ['vaun-pierre@hotmail.com'],
       subject: `Mongodb Database, ${event.detail.operationType.toUpperCase()}, Trigger for ${event.detail.ns.db}.${event.detail.ns.coll}`,
       text: JSON.stringify(event.detail),
       html: `<pre>${JSON.stringify(event.detail, null, 2)}</pre>`,
