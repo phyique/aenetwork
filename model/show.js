@@ -9,12 +9,8 @@ const showSchema = new Schema({
   homepage: String,
   created_by: [{ name: String }],
   first_air_date: Date,
-  last_air_date: Date,
   episode_run_time: Number,
   language: String,
-  seasons: [{
-    air_date: Date, episode_count: Number, name: String, description: String, season_number: Number,
-  }],
   status: { type: String, enum: ['Active', 'Ended', 'Hiatus', 'Ongoing', 'Cancelled'] },
   type: String,
   overview: String,

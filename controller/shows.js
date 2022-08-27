@@ -10,12 +10,14 @@ const getShows = async (req, res) => {
 };
 
 const postShows = async (req, res) => {
-  const { body: { name, homepage, first_air_date } } = req;
+  const {
+    body: {
+      name, homepage, created_by, first_air_date, episode_run_time, language, status, type, overview,
+    },
+  } = req;
   try {
     const doc = new ShowModel({
-      name,
-      homepage,
-      first_air_date,
+      name, homepage, created_by, first_air_date, episode_run_time, language, status, type, overview,
     });
     return doc.save((err) => {
       if (err) return res.status(500).send(err);
@@ -29,13 +31,13 @@ const postShows = async (req, res) => {
 const putShows = async (req, res) => {
   const {
     body: {
-      show_id, name, homepage, seasons, overview,
+      show_id, name, homepage, created_by, first_air_date, episode_run_time, language, status, type, overview,
     }, params: { id },
   } = req;
   try {
     const data = await ShowModel.findOneAndUpdate({ show_id: show_id || id }, {
-      name, homepage, seasons, overview,
-    }, { upsert: true }).lean();
+      name, homepage, created_by, first_air_date, episode_run_time, language, status, type, overview,
+    }, { upsert: true, new: true }).lean();
     return res.json({ data, isSuccessful: true });
   } catch ({ message }) {
     return res.status(500).json({ message });
