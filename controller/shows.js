@@ -21,7 +21,7 @@ const postShows = async (req, res) => {
     });
     return doc.save((err) => {
       if (err) return res.status(500).send(err);
-      return res.json({ success: true });
+      return res.json({ isSuccessful: true });
     });
   } catch ({ message }) {
     return res.status(500).json({ message });
