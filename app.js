@@ -33,7 +33,7 @@ app.use('/', routes);
 
 const auth = passport.authenticate('jwt', { session: false });
 
-app.route('/').get(auth, (req, res) => (res.json({ message: 'Hello, World' })));
+app.route('/').get((req, res) => (res.json({ message: 'Hello, World' })));
 app.route('/api/shows')
   .get(auth, getShows)
   .post(auth, postShows)
