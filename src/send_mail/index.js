@@ -4,21 +4,26 @@ exports.handler = async(event) => {
 
     // const { user, pass } = await nodemailer.createTestAccount();
     const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
+        host: 'smtp.office365.com',
         port: 587,
         auth: {
-            user: 'eleonore55@ethereal.email',
-            pass: 'jCGZJBSrd36dctDAZG'
-        }
+            user: 'kratosnetwrks@outlook.com',
+            pass: process.env.OUTLOOK_PASSWORD
+        },
+        tls: { ciphers: 'SSLv3' }
     });
+    try {
+        await transporter.sendMail({
+            from: 'kratosnetwrks@outlook.com',
+            to: "vaun-pierre@hotmail.com",
+            subject: 'Event Trigger',
+            text: JSON.stringify(event), // plain text body
+            html: `<pre>${JSON.stringify(event, null, 2)}</pre>`,
+        });
+        return { isSuccessful: true, message: 'success'}
+    } catch (e) {
+        console.log(e)
+    }
 
-    const info = await transporter.sendMail({
-        from: 'eleonore55@ethereal.email',
-        to: "vaun-pierre@hotmail.com, baz@example.com",
-        subject: 'Event Trigger',
-        text: JSON.stringify(event), // plain text body
-        html: `<pre>${JSON.stringify(event, null, 2)}</pre>`,
-    });
-
-    return { message: 'success', url: nodemailer.getTestMessageUrl(info) }
+    return { isSuccessful: false, message: 'E-mail could not be send.'}
 }

@@ -1,8 +1,4 @@
 
-variable "mongodbatlas_public_key" {
-  type = string
-}
-
-variable "mongodbatlas_private_key" {
+variable "outlook_password" {
   type = string
 }

@@ -29,6 +29,11 @@ resource "aws_lambda_function" "send_mail" {
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.handler"
   runtime       = "nodejs16.x"
+  environment {
+    variables = {
+      OUTLOOK_PASSWORD = var.outlook_password
+    }
+  }
   source_code_hash = data.archive_file.send_mail.output_base64sha256
 }
 
