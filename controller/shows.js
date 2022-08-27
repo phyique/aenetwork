@@ -1,23 +1,55 @@
-// const ShowModel = require('../model/show');
-const passport = require('passport');
+const ShowModel = require('../model/show');
 
-const getShows = (req, res) => {
-  passport.authenticate('jwt', { session: false }, (error, token) => {
-
-  })(req, res);
-  return res.json({ message: 'get show' });
+const getShows = async (req, res) => {
+  try {
+    const data = await ShowModel.find({}).lean();
+    return res.json({ data, isSuccessful: true });
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
 };
 
-const postShows = (req, res) => {
-  return res.json({ message: 'post show' });
+const postShows = async (req, res) => {
+  const { body: { name, homepage, first_air_date } } = req;
+  try {
+    const doc = new ShowModel({
+      name,
+      homepage,
+      first_air_date,
+    });
+    return doc.save((err) => {
+      if (err) return res.status(500).send(err);
+      return res.json({ success: true });
+    });
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
 };
 
 const putShows = async (req, res) => {
-  return res.json({ message: 'put show' });
+  const {
+    body: {
+      show_id, name, homepage, seasons, overview,
+    }, params: { id },
+  } = req;
+  try {
+    const data = await ShowModel.findOneAndUpdate({ show_id: show_id || id }, {
+      name, homepage, seasons, overview,
+    }, { upsert: true }).lean();
+    return res.json({ data, isSuccessful: true });
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
 };
 
 const deleteShows = async (req, res) => {
-  return res.json({ message: 'delete show' });
+  const { body: { show_id }, params: { id } } = req;
+  try {
+    const data = await ShowModel.deleteOne({ show_id: id || show_id });
+    return res.status(200).json({ data, isSuccessful: true });
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
 };
 
 module.exports = {

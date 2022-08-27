@@ -40,6 +40,10 @@ app.route('/api/shows')
   .put(auth, putShows)
   .delete(auth, deleteShows);
 
+app.route('/api/shows/:id')
+  .put(auth, putShows)
+  .delete(auth, deleteShows);
+
 app.use(({ method, url }, res, next) => {
   next(res.status(405).send(`${method} is not allowed on path ${url}`));
 });

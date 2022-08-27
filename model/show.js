@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const rand = require('random-key');
 
 const { Schema } = mongoose;
 
 const showSchema = new Schema({
   name: String,
+  show_id: { type: String, unique: true, default: () => rand.generate(7) },
   homepage: String,
   created_by: [{ name: String }],
   first_air_date: Date,
@@ -19,4 +21,4 @@ const showSchema = new Schema({
   updated_at: { type: Date, default: Date.now },
 });
 const showModel = mongoose.model('Show', showSchema);
-module.exports = { showModel };
+module.exports = showModel;
